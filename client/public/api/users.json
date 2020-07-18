@@ -1,0 +1,37 @@
+[
+  {
+    "Name": "Praveen Kumar",
+    "Age": 27,
+    "Location": "London, England"
+  },
+  {
+    "Name": "Kshitij",
+    "Age": 20,
+    "Location": "Delhi, India"
+  },
+  {
+    "Name": "Bharath",
+    "Age": 28,
+    "Location": "Bangalore, India"
+  },
+  {
+    "Name": "Rohith",
+    "Age": 20,
+    "Location": "Hyderabad, India"
+  },
+  {
+    "Name": "Ashutosh",
+    "Age": 22,
+    "Location": "New Delhi, India"
+  },
+  {
+    "Name": "Jinendra",
+    "Age": 25,
+    "Location": "Pune, India"
+  },
+  {
+    "Name": "Rohit",
+    "Age": 30,
+    "Location": "Bangalore, India"
+  }
+]
