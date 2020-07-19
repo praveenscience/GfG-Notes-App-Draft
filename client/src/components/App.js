@@ -35,7 +35,8 @@ class App extends Component {
               )}
               <ul className="list-group">
                 {this.state.Data.length > 0 ? (
-                  this.state.Data.map((item, key) => (
+                  this.state.Data.map &&
+                  this.state.Data.map?.((item, key) => (
                     <li className="list-group-item" key={key}>
                       <pre>{JSON.stringify(item, null, 2)}</pre>
                     </li>
