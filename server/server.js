@@ -1,5 +1,7 @@
 // Catch hold (import) of the Express Library.
 const express = require("express");
+// Import morgan.
+const morgan = require("morgan");
 // Now create an instance of the Express Library to do our app.
 const app = express();
 // Define a port for Express App to listen to.
@@ -10,10 +12,7 @@ const users = require("./routes/users");
 
 // Let's add some middleware.
 app.use(express.json());
-app.use((req, res, next) => {
-  console.log(req.method + " " + req.path);
-  next();
-});
+app.use(morgan("dev"));
 
 // Use the routes.
 app.use("/", root);
