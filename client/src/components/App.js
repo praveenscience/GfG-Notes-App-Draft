@@ -3,6 +3,7 @@ import Header from "./Shared/Header";
 import FormGroup from "./Forms/FormGroup";
 import Card from "./Card";
 import StudentList from "./StudentList";
+import Validate from "../helpers/Validation";
 
 class App extends Component {
   state = {
@@ -16,36 +17,11 @@ class App extends Component {
   };
   handleFormSubmit = e => {
     e.preventDefault();
-    const NewUser = {
-      ...this.state.Form
+    const setState = stateParams => {
+      this.setState(stateParams);
     };
     // Check for right content.
-    const { Name, Age, About } = this.state.Form;
-    if (
-      Name.trim().length > 0 &&
-      Age.trim().length > 0 &&
-      About.trim().length > 0
-    ) {
-      if (!isNaN(Age)) {
-        this.setState({
-          Users: [...this.state.Users, NewUser],
-          Form: {
-            Name: "",
-            Age: "",
-            About: ""
-          },
-          Error: ""
-        });
-      } else {
-        this.setState({
-          Error: "Please enter only numbers for age."
-        });
-      }
-    } else {
-      this.setState({
-        Error: "You need to have all the three fields filled."
-      });
-    }
+    Validate(this.state.Form, this.state.Users, setState);
   };
   handleTextChange = e => {
     this.setState(
