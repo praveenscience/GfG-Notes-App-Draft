@@ -6,9 +6,11 @@ const app = express();
 const port = 3100;
 // Get routes.
 const root = require("./routes/root");
+const users = require("./routes/users");
 
 // Use the routes.
 app.use("/", root);
+app.use("/users", users);
 
 // Listen to 3100 port.
 app.listen(port, () => {
