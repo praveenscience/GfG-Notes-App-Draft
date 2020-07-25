@@ -10,6 +10,10 @@ const users = require("./routes/users");
 
 // Let's add some middleware.
 app.use(express.json());
+app.use((req, res, next) => {
+  console.log(req.method + " " + req.path);
+  next();
+});
 
 // Use the routes.
 app.use("/", root);
