@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/:index", (req, res) => {
-  if (req.params.index > users.length) {
+  if (req.params.index > users.length - 1) {
     res.status(404).json("User doesn't exist.");
   } else {
     res.json(users[req.params.index]);
