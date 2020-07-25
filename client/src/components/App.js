@@ -25,7 +25,7 @@ class App extends Component {
       Name.trim().length > 0 &&
       Age.trim().length > 0 &&
       About.trim().length > 0
-    )
+    ) {
       this.setState({
         Users: [...this.state.Users, NewUser],
         Form: {
@@ -35,10 +35,11 @@ class App extends Component {
         },
         Error: ""
       });
-    else
+    } else {
       this.setState({
         Error: "You need to have all the three fields filled."
       });
+    }
   };
   handleTextChange = e => {
     this.setState(
@@ -54,10 +55,11 @@ class App extends Component {
           Name.trim().length > 0 &&
           Age.trim().length > 0 &&
           About.trim().length > 0
-        )
+        ) {
           this.setState({
             Error: ""
           });
+        }
       }
     );
   };
