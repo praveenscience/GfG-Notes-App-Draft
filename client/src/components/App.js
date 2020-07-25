@@ -11,21 +11,33 @@ class App extends Component {
       Name: "",
       Age: "",
       About: ""
-    }
+    },
+    Error: ""
   };
   handleFormSubmit = e => {
     e.preventDefault();
     const NewUser = {
       ...this.state.Form
     };
-    this.setState({
-      Users: [...this.state.Users, NewUser],
-      Form: {
-        Name: "",
-        Age: "",
-        About: ""
-      }
-    });
+    // Check for right content.
+    const { Name, Age, About } = this.state.Form;
+    if (
+      Name.trim().length > 0 &&
+      Age.trim().length > 0 &&
+      About.trim().length > 0
+    )
+      this.setState({
+        Users: [...this.state.Users, NewUser],
+        Form: {
+          Name: "",
+          Age: "",
+          About: ""
+        }
+      });
+    else
+      this.setState({
+        Error: "You need to have all the three fields filled."
+      });
   };
   handleTextChange = e => {
     this.setState({
@@ -47,6 +59,9 @@ class App extends Component {
                 SubTitle="Enter the information of a new student."
               >
                 <form onSubmit={this.handleFormSubmit}>
+                  {this.state.Error.trim().length > 0 && (
+                    <div className="alert alert-danger">{this.state.Error}</div>
+                  )}
                   {Object.keys(this.state.Form).map((label, key) => (
                     <FormGroup
                       Id={label}
