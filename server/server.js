@@ -8,6 +8,9 @@ const port = 3100;
 const root = require("./routes/root");
 const users = require("./routes/users");
 
+// Let's add some middleware.
+app.use(express.json());
+
 // Use the routes.
 app.use("/", root);
 app.use("/users", users);

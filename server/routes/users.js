@@ -22,4 +22,12 @@ app.get("/:index", (req, res) => {
   }
 });
 
+app.post("/", (req, res) => {
+  if (!!req.body.name) {
+    res.status(201).json(users.push(req.body.name) - 1);
+  } else {
+    res.status(400).json("You need name parameter set.");
+  }
+});
+
 module.exports = app;
