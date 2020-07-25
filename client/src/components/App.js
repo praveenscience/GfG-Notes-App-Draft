@@ -32,7 +32,8 @@ class App extends Component {
           Name: "",
           Age: "",
           About: ""
-        }
+        },
+        Error: ""
       });
     else
       this.setState({
@@ -40,12 +41,25 @@ class App extends Component {
       });
   };
   handleTextChange = e => {
-    this.setState({
-      Form: {
-        ...this.state.Form,
-        [e.target.name]: e.target.value
+    this.setState(
+      {
+        Form: {
+          ...this.state.Form,
+          [e.target.name]: e.target.value
+        }
+      },
+      () => {
+        const { Name, Age, About } = this.state.Form;
+        if (
+          Name.trim().length > 0 &&
+          Age.trim().length > 0 &&
+          About.trim().length > 0
+        )
+          this.setState({
+            Error: ""
+          });
       }
-    });
+    );
   };
   render() {
     return (
