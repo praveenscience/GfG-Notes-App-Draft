@@ -26,15 +26,21 @@ class App extends Component {
       Age.trim().length > 0 &&
       About.trim().length > 0
     ) {
-      this.setState({
-        Users: [...this.state.Users, NewUser],
-        Form: {
-          Name: "",
-          Age: "",
-          About: ""
-        },
-        Error: ""
-      });
+      if (!isNaN(Age)) {
+        this.setState({
+          Users: [...this.state.Users, NewUser],
+          Form: {
+            Name: "",
+            Age: "",
+            About: ""
+          },
+          Error: ""
+        });
+      } else {
+        this.setState({
+          Error: "Please enter only numbers for age."
+        });
+      }
     } else {
       this.setState({
         Error: "You need to have all the three fields filled."
