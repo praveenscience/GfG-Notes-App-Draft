@@ -9,12 +9,23 @@ app.get("/", (req, res) => {
   console.log("Requested Path: " + req.path);
   console.log("Requested Method: " + req.method);
   console.log("Browser: " + req.headers["user-agent"]);
-
-  res.json({
-    Message: "Hello GfG!",
-    Error: false,
-    Headers: req.headers
-  });
+  const ua = req.headers["user-agent"].toLowerCase();
+  if (ua.indexOf("postman") === 0)
+    res.json({
+      Message: "Hello Developer!",
+      Error: false,
+      Headers: req.headers
+    });
+  else if (ua.indexOf("curl") === 0)
+    res.json({
+      Message: "Go away hacker! Access denied!",
+      Error: true
+    });
+  else
+    res.json({
+      Message: "Hello GfG!",
+      Error: false
+    });
 });
 
 // Listen to 3100 port.
