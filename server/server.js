@@ -1,8 +1,9 @@
 // Catch hold (import) of the Express Library.
 const express = require("express");
-// Import morgan and cors.
+// Import morgan, cors and session.
 const morgan = require("morgan");
 const cors = require("cors");
+const session = require("express-session");
 // Now create an instance of the Express Library to do our app.
 const app = express();
 // Define a port for Express App to listen to.
@@ -15,6 +16,14 @@ const users = require("./routes/users");
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cors());
+app.use(
+  session({
+    secret: "gfg-geeks",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+  })
+);
 
 // Use the routes.
 app.use("/", root);
