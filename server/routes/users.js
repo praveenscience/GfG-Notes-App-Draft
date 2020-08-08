@@ -8,6 +8,7 @@ const users = [
   { username: "Kshitij", password: "k$h!t1j", fullname: "Kshitij GfG" }
 ];
 
+// Disallow users root access.
 app.get("/", (req, res) => {
   res.json("Sorry, this route is not accessible!");
 });
@@ -15,6 +16,7 @@ app.post("/", (req, res) => {
   res.json("Sorry, this route is not accessible!");
 });
 
+// Users login.
 app.get("/login", (req, res) => {
   res.status(405).json("GET requests not supported.");
 });
@@ -36,6 +38,7 @@ app.post("/login", (req, res) => {
   }
 });
 
+// Create new users.
 app.get("/new", (req, res) => {
   res.status(405).json("GET requests not supported.");
 });
@@ -73,6 +76,7 @@ app.post("/new", (req, res) => {
   }
 });
 
+// CRUD on particular user.
 app.get("/:index", (req, res) => {
   if (req.params.index > users.length - 1) {
     res.status(404).json("User doesn't exist.");
