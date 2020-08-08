@@ -1,10 +1,9 @@
 // Catch hold (import) of the Express Library.
 const express = require("express");
-// Import morgan, cors, session and nodemailer.
+// Import morgan, cors, and session.
 const morgan = require("morgan");
 const cors = require("cors");
 const session = require("express-session");
-const nodemailer = require("nodemailer");
 // Now create an instance of the Express Library to do our app.
 const app = express();
 // Define a port for Express App to listen to.
