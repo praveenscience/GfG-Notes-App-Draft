@@ -3,6 +3,8 @@ const app = express.Router();
 const fs = require("fs");
 
 // Fetch notes database.
+if (!fs.existsSync(__dirname + "/../storage/notes.json"))
+  fs.writeFileSync(__dirname + "/../storage/notes.json", "[]");
 const notes = require("../storage/notes.json");
 
 // Work with notes only if user is logged in.
