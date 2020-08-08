@@ -9,7 +9,7 @@ const users = [
 ];
 
 app.get("/", (req, res) => {
-  res.json(users);
+  res.json("Sorry, this route is not accessible!");
 });
 
 app.get("/loggedin", (req, res) => {
