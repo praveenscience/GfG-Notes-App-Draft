@@ -10,4 +10,4 @@
   - Allows users to update and delete their own notes. (API ✅ / FE ❎)
   - Allows user to write in Markdown & view in HTML. (FE ❎)
   - Show the notes only when the users are logged in. (API ✅ / FE ❎)
-  - Persist data on API after restart. (API ❎)
+  - Persist data on API after restart. (API ✅)
