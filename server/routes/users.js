@@ -12,6 +12,10 @@ app.get("/", (req, res) => {
   res.json("Sorry, this route is not accessible!");
 });
 
+app.get("/login", (req, res) => {
+  res.status(405).json("GET requests not supported.");
+});
+
 app.post("/login", (req, res) => {
   const matchedUser = {
     ...users.find(
@@ -28,6 +32,10 @@ app.post("/login", (req, res) => {
     delete req.session.User;
     res.status(401).json("Username or password is wrong.");
   }
+});
+
+app.get("/new", (req, res) => {
+  res.status(405).json("GET requests not supported.");
 });
 
 app.post("/new", (req, res) => {
