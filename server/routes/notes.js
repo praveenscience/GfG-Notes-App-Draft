@@ -3,6 +3,10 @@ const app = express.Router();
 const fs = require("fs");
 
 // Fetch notes database.
+// Create storage directory if it doesn't exist.
+if (!fs.existsSync(__dirname + "/../storage"))
+  fs.mkdirSync(__dirname + "/../storage");
+// Create initial file if it doesn't exist.
 if (!fs.existsSync(__dirname + "/../storage/notes.json"))
   fs.writeFileSync(__dirname + "/../storage/notes.json", "[]");
 const notes = require("../storage/notes.json");
