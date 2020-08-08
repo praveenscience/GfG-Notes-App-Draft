@@ -38,6 +38,15 @@ app.post("/login", (req, res) => {
   }
 });
 
+// Users logout.
+app.get("/logout", (req, res) => {
+  res.status(405).json("GET requests not supported.");
+});
+app.post("/logout", (req, res) => {
+  req.session = {};
+  res.json("User successfully logged out.");
+});
+
 // Create new users.
 app.get("/new", (req, res) => {
   res.status(405).json("GET requests not supported.");
