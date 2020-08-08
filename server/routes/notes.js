@@ -63,7 +63,7 @@ app.get("/me", (req, res) => {
 // View a particular note.
 app.get("/:noteId", (req, res) => {
   const noteId = +req.params.noteId;
-  if (!notes[noteId]) {
+  if (!notes[noteId] || !notes[noteId].username) {
     res.status(404).json("Note doesn't exist.");
   } else if (
     notes[noteId].private &&
@@ -78,10 +78,10 @@ app.get("/:noteId", (req, res) => {
 // Update particular note.
 app.post("/:noteId", (req, res) => {
   const noteId = +req.params.noteId;
-  if (!notes[noteId]) {
+  if (!notes[noteId] || !notes[noteId].username) {
     res.status(404).json("Note doesn't exist.");
   } else if (notes[noteId].username !== req.session.User.username) {
-    // Don't show others private notes!
+    // Don't give access to others' notes!
     res.status(403).json("You don't have access to edit or delete this note.");
   } else {
     const note = notes[noteId];
@@ -108,6 +108,27 @@ app.post("/:noteId", (req, res) => {
     } else {
       res.status(400).json("Sorry, you need both title and content.");
     }
+  }
+});
+// Delete particular note.
+app.delete("/:noteId", (req, res) => {
+  const noteId = +req.params.noteId;
+  if (!notes[noteId] || !notes[noteId].username) {
+    res.status(404).json("Note doesn't exist.");
+  } else if (notes[noteId].username !== req.session.User.username) {
+    // Don't give access to others' notes!
+    res.status(403).json("You don't have access to edit or delete this note.");
+  } else {
+    notes[noteId] = {
+      username: null,
+      title: null,
+      content: null,
+      private: true,
+      editCount: null,
+      createdAt: null,
+      updatedAt: new Date()
+    };
+    res.json(`Note #${noteId} successfully deleted.`);
   }
 });
 
