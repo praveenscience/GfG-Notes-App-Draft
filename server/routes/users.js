@@ -12,14 +12,6 @@ app.get("/", (req, res) => {
   res.json("Sorry, this route is not accessible!");
 });
 
-app.get("/loggedin", (req, res) => {
-  if (req.session.User) {
-    res.json("User logged in as " + req.session.User.fullname + ".");
-  } else {
-    res.json("User not logged in.");
-  }
-});
-
 app.post("/login", (req, res) => {
   const matchedUser = {
     ...users.find(
