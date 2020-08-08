@@ -50,6 +50,10 @@ app.post("/", (req, res) => {
   }
 });
 
+// View user notes.
+app.get("/me", (req, res) => {
+  res.json(notes.filter(note => note.username === req.session.User.username));
+});
 // View a particular note.
 app.get("/:noteId", (req, res) => {
   const noteId = +req.params.noteId;
