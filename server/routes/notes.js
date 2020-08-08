@@ -75,5 +75,40 @@ app.get("/:noteId", (req, res) => {
     res.json(notes[noteId]);
   }
 });
+// Update particular note.
+app.post("/:noteId", (req, res) => {
+  const noteId = +req.params.noteId;
+  if (!notes[noteId]) {
+    res.status(404).json("Note doesn't exist.");
+  } else if (notes[noteId].username !== req.session.User.username) {
+    // Don't show others private notes!
+    res.status(403).json("You don't have access to edit or delete this note.");
+  } else {
+    const note = notes[noteId];
+    if (
+      req.body.title &&
+      req.body.title.trim().length > 3 &&
+      req.body.content &&
+      req.body.content.trim().length > 3 &&
+      typeof req.body.private === "boolean"
+    ) {
+      const { title, content, private } = req.body;
+      const editCount = note.editCount + 1,
+        updatedAt = new Date();
+      // Update the particular note.
+      notes[noteId] = {
+        ...note,
+        title,
+        content,
+        private,
+        editCount,
+        updatedAt
+      };
+      res.json(`Updated note #${noteId} successfully.`);
+    } else {
+      res.status(400).json("Sorry, you need both title and content.");
+    }
+  }
+});
 
 module.exports = app;
