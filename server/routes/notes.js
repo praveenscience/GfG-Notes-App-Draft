@@ -18,7 +18,6 @@ app.get("/", (req, res) => {
   // Show all the notes.
   res.json(notes);
 });
-
 // Create a new note.
 app.post("/", (req, res) => {
   // Create a new note.
@@ -48,6 +47,16 @@ app.post("/", (req, res) => {
     );
   } else {
     res.status(400).json("Sorry, you need both title and content.");
+  }
+});
+
+// View a particular note.
+app.get("/:noteId", (req, res) => {
+  const noteId = +req.params.noteId;
+  if (!notes[noteId]) {
+    res.status(404).json("Note doesn't exist.");
+  } else {
+    res.json(notes[noteId]);
   }
 });
 
