@@ -30,26 +30,6 @@ app.use(
 app.use("/", root);
 app.use("/users", users);
 
-app.get("/email", async (req, res) => {
-  const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false, // true for 465, false for other ports
-    auth: {
-      user: "gfg4everyone@gmail.com",
-      pass: "qwerty@123"
-    }
-  });
-  const info = await transporter.sendMail({
-    from: '"Fred Foo 👻" <foo@example.com>',
-    to: "gfg4everyone@gmail.com",
-    subject: "Hello ✔ from Node JS!", // Subject line
-    text: "Hello world?", // plain text body
-    html: "<b>Hello world?</b>" // html body
-  });
-  res.json({ info, previewUrl: nodemailer.getTestMessageUrl(info) });
-});
-
 // Listen to 3100 port.
 app.listen(port, () => {
   console.log("Successfully started the server on port " + port);
