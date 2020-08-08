@@ -16,7 +16,13 @@ app.use((req, res, next) => {
 // List all notes.
 app.get("/", (req, res) => {
   // Show all the notes.
-  res.json(notes);
+  res.json(
+    notes.filter(
+      note =>
+        !note.private ||
+        (note.private && note.username === req.session.User.username)
+    )
+  );
 });
 // Create a new note.
 app.post("/", (req, res) => {
@@ -59,6 +65,12 @@ app.get("/:noteId", (req, res) => {
   const noteId = +req.params.noteId;
   if (!notes[noteId]) {
     res.status(404).json("Note doesn't exist.");
+  } else if (
+    notes[noteId].private &&
+    notes[noteId].username !== req.session.User.username
+  ) {
+    // Don't show others private notes!
+    res.status(403).json("You don't have access to this note.");
   } else {
     res.json(notes[noteId]);
   }
