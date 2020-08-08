@@ -11,6 +11,7 @@ const port = 3100;
 // Get routes.
 const root = require("./routes/root");
 const users = require("./routes/users");
+const notes = require("./routes/notes");
 
 // Let's add some middleware.
 app.use(express.json());
@@ -28,6 +29,7 @@ app.use(
 // Use the routes.
 app.use("/", root);
 app.use("/users", users);
+app.use("/notes", notes);
 
 // Listen to 3100 port.
 app.listen(port, () => {
