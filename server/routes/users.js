@@ -11,11 +11,13 @@ const users = [
 app.get("/", (req, res) => {
   res.json("Sorry, this route is not accessible!");
 });
+app.post("/", (req, res) => {
+  res.json("Sorry, this route is not accessible!");
+});
 
 app.get("/login", (req, res) => {
   res.status(405).json("GET requests not supported.");
 });
-
 app.post("/login", (req, res) => {
   const matchedUser = {
     ...users.find(
@@ -37,7 +39,6 @@ app.post("/login", (req, res) => {
 app.get("/new", (req, res) => {
   res.status(405).json("GET requests not supported.");
 });
-
 app.post("/new", (req, res) => {
   if (
     req.body.username &&
@@ -78,6 +79,17 @@ app.get("/:index", (req, res) => {
   } else {
     res.json(users[req.params.index]);
   }
+});
+app.post("/:index", (req, res) => {
+  res.status(405).json("POST requests not supported.");
+});
+app.put("/:index", (req, res) => {
+  // Update the specific user.
+  res.json("ToDo.");
+});
+app.delete("/:index", (req, res) => {
+  // Get the corresponding note from the list.
+  res.json("ToDo.");
 });
 
 module.exports = app;
