@@ -1,8 +1,9 @@
 const express = require("express");
 const app = express.Router();
+const fs = require("fs");
 
-// Created the notes database.
-const notes = [];
+// Fetch notes database.
+const notes = require("../storage/notes.json");
 
 // Work with notes only if user is logged in.
 app.use((req, res, next) => {
@@ -10,6 +11,11 @@ app.use((req, res, next) => {
     res.status(401).json("You need to login to work with notes!");
   } else {
     next();
+    // Update the notes.json with the content of notes.
+    fs.writeFileSync(
+      __dirname + "/../storage/notes.json",
+      JSON.stringify(notes)
+    );
   }
 });
 
