@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import FormGroup from "../Forms/FormGroup";
 
 const Login = () => {
+  const [FormData, setFormData] = useState({
+    username: "",
+    password: ""
+  });
+  const handleChange = e => {
+    setFormData({
+      ...FormData,
+      [e.target.name]: e.target.value
+    });
+  };
   return (
     <div className="container my-5">
       <div className="row">
@@ -14,16 +24,23 @@ const Login = () => {
                   {
                     Id: "username",
                     Label: "Username",
-                    Type: "text"
+                    Type: "text",
+                    onChange: handleChange,
+                    Value: FormData.username
                   },
                   {
                     Id: "password",
                     Label: "Password",
-                    Type: "password"
+                    Type: "password",
+                    onChange: handleChange,
+                    Value: FormData.password
                   }
                 ].map((fg, key) => (
                   <FormGroup {...fg} key={key} />
                 ))}
+                <pre className="border p-3 bg-light">
+                  {JSON.stringify(FormData, null, 2)}
+                </pre>
                 <input
                   type="submit"
                   value="Sign In"
