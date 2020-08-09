@@ -11,3 +11,5 @@
 - Show the notes only when the users are logged in. (API ✅ / FE ❎)
 - Persist data on API after restart. (API ✅)
 - Persist login on refresh. (FE ❎)
+- Implement router in Front End. (FE ❎)
+- Create separate routes for Login and Logout. (FE ❎)
