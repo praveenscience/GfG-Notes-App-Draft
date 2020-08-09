@@ -31,7 +31,7 @@ app.post("/login", (req, res) => {
   if (matchedUser.username && matchedUser.username.length > 3) {
     delete matchedUser.password;
     req.session.User = matchedUser;
-    res.json("User logged in successfully as " + matchedUser.fullname + ".");
+    res.json(matchedUser);
   } else {
     delete req.session.User;
     res.status(401).json("Username or password is wrong.");
