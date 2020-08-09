@@ -24,12 +24,18 @@ class App extends Component {
         });
       });
   };
+  handleLogout = () => {
+    this.setState({
+      LoggedIn: false,
+      Error: false
+    });
+  };
   render() {
     return (
       <div className="App">
         <Header dark={true}>Leadstagram</Header>
         {this.state.LoggedIn ? (
-          <Notes LoggedIn={this.state.LoggedIn} />
+          <Notes LoggedIn={this.state.LoggedIn} Logout={this.handleLogout} />
         ) : (
           <Login
             handleAuthentication={this.handleAuthentication}
