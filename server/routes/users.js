@@ -1,12 +1,29 @@
 const express = require("express");
 const app = express.Router();
 
-const users = [
-  { username: "Praveen", password: "Praveen", fullname: "Praveen Kumar" },
-  { username: "Rohit", password: "Rohit123", fullname: "Rohit GfG" },
-  { username: "Kumar", password: "Kumar@Hello", fullname: "Kumar GfG" },
-  { username: "Kshitij", password: "k$h!t1j", fullname: "Kshitij GfG" }
-];
+// Fetch users database.
+// Create storage directory if it doesn't exist.
+if (!fs.existsSync(__dirname + "/../storage"))
+  fs.mkdirSync(__dirname + "/../storage");
+// Create initial file if it doesn't exist.
+if (!fs.existsSync(__dirname + "/../storage/users.json"))
+  fs.writeFileSync(
+    __dirname + "/../storage/users.json",
+    JSON.stringify([
+      { username: "Praveen", password: "Praveen", fullname: "Praveen Kumar" },
+      { username: "Rohit", password: "Rohit123", fullname: "Rohit GfG" },
+      { username: "Kumar", password: "Kumar@Hello", fullname: "Kumar GfG" },
+      { username: "Kshitij", password: "k$h!t1j", fullname: "Kshitij GfG" }
+    ])
+  );
+const users = require("../storage/users.json");
+
+// Sync users data.
+app.use((req, res, next) => {
+  next();
+  // Update the notes.json with the content of notes.
+  fs.writeFileSync(__dirname + "/../storage/users.json", JSON.stringify(users));
+});
 
 // Disallow users root access.
 app.get("/", (req, res) => {
