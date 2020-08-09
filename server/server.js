@@ -28,8 +28,8 @@ app.use(
 
 // Use the routes.
 app.use("/", root);
-app.use("/users", users);
-app.use("/notes", notes);
+app.use("/api/users", users);
+app.use("/api/notes", notes);
 
 // Listen to 3100 port.
 app.listen(port, () => {
