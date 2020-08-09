@@ -43,7 +43,9 @@ app.get("/logout", (req, res) => {
   res.status(405).json("GET requests not supported.");
 });
 app.post("/logout", (req, res) => {
-  req.session = {};
+  if (req.session.User) {
+    req.session = {};
+  }
   res.json("User successfully logged out.");
 });
 
