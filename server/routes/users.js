@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express.Router();
+const fs = require("fs");
 
 // Fetch users database.
 // Create storage directory if it doesn't exist.
