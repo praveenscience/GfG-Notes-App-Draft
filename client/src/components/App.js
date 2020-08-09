@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Header from "./Shared/Header";
 import Login from "./Login/Login";
+import Notes from "./Notes/Notes";
 import { AuthenticateUser } from "../services/AuthService";
 
 class App extends Component {
@@ -28,7 +29,7 @@ class App extends Component {
       <div className="App">
         <Header dark={true}>Leadstagram</Header>
         {this.state.LoggedIn ? (
-          <p>Show Notes</p>
+          <Notes LoggedIn={this.state.LoggedIn} />
         ) : (
           <Login
             handleAuthentication={this.handleAuthentication}
