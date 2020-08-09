@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FormGroup from "../Forms/FormGroup";
 
-const Login = () => {
+const Login = ({ handleAuthentication, Error }) => {
   const [FormData, setFormData] = useState({
     username: "",
     password: ""
@@ -12,6 +12,10 @@ const Login = () => {
       [e.target.name]: e.target.value
     });
   };
+  const handleSubmit = e => {
+    e.preventDefault();
+    handleAuthentication({ ...FormData });
+  };
   return (
     <div className="container my-5">
       <div className="row">
@@ -19,7 +23,12 @@ const Login = () => {
           <div className="card">
             <h5 className="card-header">Sign In</h5>
             <div className="card-body">
-              <form>
+              <form onSubmit={handleSubmit}>
+                {Error && (
+                  <div className="alert alert-danger text-center">
+                    Username or password is wrong!
+                  </div>
+                )}
                 {[
                   {
                     Id: "username",
@@ -38,9 +47,6 @@ const Login = () => {
                 ].map((fg, key) => (
                   <FormGroup {...fg} key={key} />
                 ))}
-                <pre className="border p-3 bg-light">
-                  {JSON.stringify(FormData, null, 2)}
-                </pre>
                 <input
                   type="submit"
                   value="Sign In"
