@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import FormGroup from "../Forms/FormGroup";
+import { RegisterUser } from "../../services/AuthService";
 
 const Login = ({ handleAuthentication, Error }) => {
+  const [RegError, setRegError] = useState(false);
+  const [RegSuccess, setRegSuccess] = useState(false);
   const [LoginData, setLoginData] = useState({
     username: "",
     password: ""
@@ -29,6 +32,17 @@ const Login = ({ handleAuthentication, Error }) => {
   };
   const handleRegister = e => {
     e.preventDefault();
+    RegisterUser(RegisterData)
+      .then(res => {
+        if (res.status === 201) {
+          setRegSuccess(res.data);
+          setRegError(false);
+        }
+      })
+      .catch(err => {
+        setRegSuccess(false);
+        setRegError(err.response.data);
+      });
   };
   return (
     <div className="container my-5">
@@ -75,9 +89,14 @@ const Login = ({ handleAuthentication, Error }) => {
             <h5 className="card-header">New User? Register</h5>
             <div className="card-body">
               <form onSubmit={handleRegister}>
-                {Error && (
+                {RegError && (
                   <div className="alert alert-danger text-center">
-                    Username already exists!
+                    {RegError}
+                  </div>
+                )}
+                {RegSuccess && (
+                  <div className="alert alert-success text-center">
+                    {RegSuccess}
                   </div>
                 )}
                 {[
