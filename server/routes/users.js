@@ -108,7 +108,7 @@ app.put("/:index", (req, res) => {
 });
 app.delete("/:index", (req, res) => {
   // Get the corresponding note from the list.
-  res.json("ToDo.");
+  res.json("Won't do.");
 });
 
 module.exports = app;
