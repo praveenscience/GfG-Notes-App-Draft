@@ -4,7 +4,7 @@ import { RegisterUser } from "../../services/AuthService";
 import LoginForm from "./_Login";
 import RegisterForm from "./_Register";
 
-const Login = ({ handleAuthentication, Error }) => {
+const Login = ({ handleAuthentication, Error, Success }) => {
   const [RegError, setRegError] = useState(false);
   const [RegSuccess, setRegSuccess] = useState(false);
   const [LoginData, setLoginData] = useState({
@@ -53,6 +53,7 @@ const Login = ({ handleAuthentication, Error }) => {
           <LoginForm
             {...{
               Error,
+              Success,
               LoginData,
               handleLogin,
               handleLoginData,

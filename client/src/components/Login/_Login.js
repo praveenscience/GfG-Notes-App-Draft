@@ -2,6 +2,7 @@ import React from "react";
 
 const LoginForm = ({
   Error,
+  Success,
   LoginData,
   handleLogin,
   handleLoginData,
@@ -15,6 +16,11 @@ const LoginForm = ({
           {Error && (
             <div className="alert alert-danger text-center">
               Username or password is wrong!
+            </div>
+          )}
+          {Success && (
+            <div className="alert alert-success text-center">
+              User successfully logged out!
             </div>
           )}
           {[

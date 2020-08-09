@@ -7,20 +7,23 @@ import { AuthenticateUser, LogoutUser } from "../services/AuthService";
 class App extends Component {
   state = {
     LoggedIn: false,
-    Error: false
+    Error: false,
+    Success: false
   };
   handleAuthentication = cred => {
     AuthenticateUser(cred)
       .then(res => {
         this.setState({
           LoggedIn: res.data,
-          Error: false
+          Error: false,
+          Success: false
         });
       })
       .catch(() => {
         this.setState({
           LoggedIn: false,
-          Error: true
+          Error: true,
+          Success: false
         });
       });
   };
@@ -29,7 +32,8 @@ class App extends Component {
       if (res.data === "User successfully logged out.")
         this.setState({
           LoggedIn: false,
-          Error: false
+          Error: false,
+          Success: true
         });
     });
   };
@@ -43,6 +47,7 @@ class App extends Component {
           <Login
             handleAuthentication={this.handleAuthentication}
             Error={this.state.Error}
+            Success={this.state.Success}
           />
         )}
       </div>
