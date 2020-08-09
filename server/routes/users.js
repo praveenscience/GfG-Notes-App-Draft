@@ -90,9 +90,13 @@ app.get("/:index", (req, res) => {
   if (req.params.index > users.length - 1) {
     res.status(404).json("User doesn't exist.");
   } else {
-    const user = { ...users[req.params.index] };
-    delete user.password;
-    res.json(user);
+    if (!req.session.User) {
+      res.status(401).json("You need to login to work with users!");
+    } else {
+      const user = { ...users[req.params.index] };
+      delete user.password;
+      res.json(user);
+    }
   }
 });
 app.post("/:index", (req, res) => {
