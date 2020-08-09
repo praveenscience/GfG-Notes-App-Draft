@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import FormGroup from "../Forms/FormGroup";
 import { RegisterUser } from "../../services/AuthService";
+import LoginForm from "./_Login";
+import RegisterForm from "./_Register";
 
 const Login = ({ handleAuthentication, Error }) => {
   const [RegError, setRegError] = useState(false);
@@ -48,90 +50,27 @@ const Login = ({ handleAuthentication, Error }) => {
     <div className="container my-5">
       <div className="row">
         <div className="col-12 col-md-6">
-          <div className="card">
-            <h5 className="card-header">Sign In</h5>
-            <div className="card-body">
-              <form onSubmit={handleLogin}>
-                {Error && (
-                  <div className="alert alert-danger text-center">
-                    Username or password is wrong!
-                  </div>
-                )}
-                {[
-                  {
-                    Id: "username",
-                    Label: "Username",
-                    Type: "text",
-                    onChange: handleLoginData,
-                    Value: LoginData.username
-                  },
-                  {
-                    Id: "password",
-                    Label: "Password",
-                    Type: "password",
-                    onChange: handleLoginData,
-                    Value: LoginData.password
-                  }
-                ].map((fg, key) => (
-                  <FormGroup {...fg} key={key} />
-                ))}
-                <input
-                  type="submit"
-                  value="Sign In"
-                  className="btn btn-primary"
-                />
-              </form>
-            </div>
-          </div>
+          <LoginForm
+            {...{
+              Error,
+              LoginData,
+              handleLogin,
+              handleLoginData,
+              FormGroup
+            }}
+          />
         </div>
         <div className="col-12 col-md-6">
-          <div className="card">
-            <h5 className="card-header">New User? Register</h5>
-            <div className="card-body">
-              <form onSubmit={handleRegister}>
-                {RegError && (
-                  <div className="alert alert-danger text-center">
-                    {RegError}
-                  </div>
-                )}
-                {RegSuccess && (
-                  <div className="alert alert-success text-center">
-                    {RegSuccess}
-                  </div>
-                )}
-                {[
-                  {
-                    Id: "username",
-                    Label: "Username",
-                    Type: "text",
-                    onChange: handleRegisterData,
-                    Value: RegisterData.username
-                  },
-                  {
-                    Id: "password",
-                    Label: "Password",
-                    Type: "password",
-                    onChange: handleRegisterData,
-                    Value: RegisterData.password
-                  },
-                  {
-                    Id: "fullname",
-                    Label: "Full Name",
-                    Type: "text",
-                    onChange: handleRegisterData,
-                    Value: RegisterData.fullname
-                  }
-                ].map((fg, key) => (
-                  <FormGroup {...fg} key={key} />
-                ))}
-                <input
-                  type="submit"
-                  value="Register"
-                  className="btn btn-primary"
-                />
-              </form>
-            </div>
-          </div>
+          <RegisterForm
+            {...{
+              RegError,
+              RegSuccess,
+              RegisterData,
+              handleRegister,
+              handleRegisterData,
+              FormGroup
+            }}
+          />
         </div>
       </div>
     </div>
