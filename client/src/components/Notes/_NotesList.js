@@ -36,7 +36,10 @@ const NotesList = ({ Notes, LoggedIn }) => {
           Notes.map((note, key) => (
             <Link
               to={"/note-" + note.NoteID}
-              className="list-group-item list-group-item-action"
+              className={
+                "list-group-item list-group-item-action" +
+                ("/note-" + note.NoteID === urm.url ? " active" : "")
+              }
               key={key}
             >
               {note.title}
