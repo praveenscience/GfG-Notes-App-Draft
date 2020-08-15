@@ -15,7 +15,9 @@ import { Link } from "react-router-dom";
 
 const NoteContent = ({ Note }) => {
   return (
-    <section className="NotesContainer-Content">
+    <section
+      className={"NotesContainer-Content" + (Note.private ? " private" : "")}
+    >
       <header>
         <h3>{Note.title}</h3>
         <div className="Author">
@@ -25,7 +27,7 @@ const NoteContent = ({ Note }) => {
           </p>
         </div>
       </header>
-      <article className="border rounded p-3 bg-light">{Note.content}</article>
+      <article className="border rounded p-3">{Note.content}</article>
       <Link to="/" className="btn btn-sm btn-info mt-3">
         Back to Home
       </Link>
