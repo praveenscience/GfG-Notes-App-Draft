@@ -2,13 +2,19 @@ import React, { Component } from "react";
 import Header from "./Shared/Header";
 import Login from "./Login/Login";
 import Notes from "./Notes/Notes";
-import { AuthenticateUser, LogoutUser, GetActiveUser } from "../services/AuthService";
+import {
+  AuthenticateUser,
+  LogoutUser,
+  GetActiveUser
+} from "../services/AuthService";
+import Loading from "./Shared/Loading";
 
 class App extends Component {
   state = {
     LoggedIn: false,
     Error: false,
-    Success: false
+    Success: false,
+    Loaded: false
   };
   handleAuthentication = cred => {
     AuthenticateUser(cred)
@@ -38,19 +44,43 @@ class App extends Component {
     });
   };
   componentDidMount() {
-    GetActiveUser().then(res => {
-      if (res.status === 200) {
+    GetActiveUser()
+      .then(res => {
+        if (res.status === 200) {
+          this.setState({
+            LoggedIn: res.data
+          });
+        }
+      })
+      .catch(() => {})
+      .then(() => {
         this.setState({
-          LoggedIn: res.data
+          Loaded: true
         });
-      }
-    });
+      });
   }
   render() {
     return (
       <div className="App">
         <Header dark={true}>Leadstagram</Header>
-        {this.state.LoggedIn ? <Notes LoggedIn={this.state.LoggedIn} Logout={this.handleLogout} /> : <Login handleAuthentication={this.handleAuthentication} Error={this.state.Error} Success={this.state.Success} />}
+        {this.state.Loaded ? (
+          <>
+            {this.state.LoggedIn ? (
+              <Notes
+                LoggedIn={this.state.LoggedIn}
+                Logout={this.handleLogout}
+              />
+            ) : (
+              <Login
+                handleAuthentication={this.handleAuthentication}
+                Error={this.state.Error}
+                Success={this.state.Success}
+              />
+            )}
+          </>
+        ) : (
+          <Loading />
+        )}
       </div>
     );
   }
