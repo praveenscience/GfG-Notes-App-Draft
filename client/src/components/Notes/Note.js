@@ -24,6 +24,11 @@ const NoteContent = ({ Note }) => {
           <p>
             Written by <em>{Note.username}</em> on <em>{Note.createdAt}</em>.
             Last updated on <em>{Note.updatedAt}</em>.
+            {Note.editCount > 0
+              ? ` This note was edited ${Note.editCount} time${
+                  Note.editCount === 1 ? "" : "s"
+                }.`
+              : ""}
           </p>
         </div>
       </header>
