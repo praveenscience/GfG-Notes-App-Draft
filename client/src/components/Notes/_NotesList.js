@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
-import NotesContainer from "./_NotesContainer";
 
 const NotesList = ({ Notes, LoggedIn }) => {
   const [Mine, setMine] = useState(false);
