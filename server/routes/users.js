@@ -36,7 +36,11 @@ app.post("/", (req, res) => {
 
 // Users login.
 app.get("/login", (req, res) => {
-  res.status(405).json("GET requests not supported.");
+  if (!req.session.User) {
+    res.status(405).json("GET requests not supported.");
+  } else {
+    res.json(req.session.User);
+  }
 });
 app.post("/login", (req, res) => {
   const matchedUser = {
