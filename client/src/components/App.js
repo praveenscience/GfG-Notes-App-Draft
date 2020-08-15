@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Header from "./Shared/Header";
 import Login from "./Login/Login";
 import Notes from "./Notes/Notes";
-import { AuthenticateUser, LogoutUser } from "../services/AuthService";
+import { AuthenticateUser, LogoutUser, GetActiveUser } from "../services/AuthService";
 
 class App extends Component {
   state = {
@@ -37,19 +37,20 @@ class App extends Component {
         });
     });
   };
+  componentDidMount() {
+    GetActiveUser().then(res => {
+      if (res.status === 200) {
+        this.setState({
+          LoggedIn: res.data
+        });
+      }
+    });
+  }
   render() {
     return (
       <div className="App">
         <Header dark={true}>Leadstagram</Header>
-        {this.state.LoggedIn ? (
-          <Notes LoggedIn={this.state.LoggedIn} Logout={this.handleLogout} />
-        ) : (
-          <Login
-            handleAuthentication={this.handleAuthentication}
-            Error={this.state.Error}
-            Success={this.state.Success}
-          />
-        )}
+        {this.state.LoggedIn ? <Notes LoggedIn={this.state.LoggedIn} Logout={this.handleLogout} /> : <Login handleAuthentication={this.handleAuthentication} Error={this.state.Error} Success={this.state.Success} />}
       </div>
     );
   }
