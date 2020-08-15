@@ -20,7 +20,7 @@ class Notes extends Component {
   render() {
     const { LoggedIn, Logout } = this.props;
     return (
-      <div className="container-fluid my-5">
+      <div className="container-fluid my-2">
         <div className="row">
           <div className="col-12">
             <div className="card">

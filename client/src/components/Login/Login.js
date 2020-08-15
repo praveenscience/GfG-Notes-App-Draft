@@ -47,7 +47,7 @@ const Login = ({ handleAuthentication, Error, Success }) => {
       });
   };
   return (
-    <div className="container my-5">
+    <div className="container my-2">
       <div className="row">
         <div className="col-12 col-md-6">
           <LoginForm
