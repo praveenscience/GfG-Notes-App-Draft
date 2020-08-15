@@ -1,11 +1,16 @@
 import React from "react";
+import NotesList from "./_NotesList";
 
 const NotesSidebar = ({ Notes }) => {
   return (
     <div className="col-2">
-      <pre className="border rounded bg-light p-2">
-        {JSON.stringify(Notes, null, 2)}
-      </pre>
+      {Notes && Notes.length > 0 ? (
+        <NotesList Notes={Notes} />
+      ) : (
+        <div className="alert alert-info">
+          No notes found. Please create one.
+        </div>
+      )}
     </div>
   );
 };
