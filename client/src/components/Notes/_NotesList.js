@@ -38,7 +38,8 @@ const NotesList = ({ Notes, LoggedIn }) => {
               to={"/note-" + note.NoteID}
               className={
                 "list-group-item list-group-item-action" +
-                ("/note-" + note.NoteID === urm.url ? " active" : "")
+                ("/note-" + note.NoteID === urm.url ? " active" : "") +
+                (note.private ? " list-group-item-info" : "")
               }
               key={key}
             >
