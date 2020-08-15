@@ -1,17 +1,6 @@
 import React from "react";
+import Moment from "moment";
 import { Link } from "react-router-dom";
-
-/*
-{
-  "username": "Praveen",
-  "title": "First Note",
-  "content": "GfG Classes are going to end!",
-  "private": false,
-  "editCount": 0,
-  "createdAt": "2020-08-15T15:16:50.936Z",
-  "updatedAt": "2020-08-15T15:16:50.936Z"
-}
-*/
 
 const NoteContent = ({ Note }) => {
   return (
@@ -22,13 +11,21 @@ const NoteContent = ({ Note }) => {
         <h3>{Note.title}</h3>
         <div className="Author">
           <p>
-            Written by <em>{Note.username}</em> on <em>{Note.createdAt}</em>.
-            Last updated on <em>{Note.updatedAt}</em>.
-            {Note.editCount > 0
-              ? ` This note was edited ${Note.editCount} time${
-                  Note.editCount === 1 ? "" : "s"
-                }.`
-              : ""}
+            Written by <em>{Note.username}</em> on{" "}
+            <em>{Moment(Note.createdAt).format("MMMM Do YYYY, h:mm a")}</em>.
+            {Note.editCount > 0 ? (
+              <>
+                {" "}
+                Last updated on{" "}
+                <em>
+                  {Moment(Note.updatedAt).format("MMMM Do YYYY, h:mm:ss a")}
+                </em>
+                . This note was edited <em>{Note.editCount}</em> time
+                {Note.editCount === 1 ? "" : "s"}.
+              </>
+            ) : (
+              ""
+            )}
           </p>
         </div>
       </header>
