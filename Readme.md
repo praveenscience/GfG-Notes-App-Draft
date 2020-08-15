@@ -8,7 +8,7 @@
 - Allows users to view their own notes. (API ✅ / FE ✅)
 - Users shouldn't be able to view others' private notes. (API ✅ / FE ✅)
 - Allows users to update and delete their own notes. (API ✅ / FE ❎)
-- Allows user to write in Markdown & view in HTML. (FE ❎)
+- Allows user to write in Markdown & view in HTML. (FE ✅)
 - Show the notes only when the users are logged in. (API ✅ / FE ✅)
 - Persist data on API after restart. (API ✅)
 - Persist login on refresh. (FE ✅)

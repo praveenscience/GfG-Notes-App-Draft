@@ -1,6 +1,7 @@
 import React from "react";
 import Moment from "moment";
 import { Link } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
 
 const NoteContent = ({ Note }) => {
   return (
@@ -29,7 +30,9 @@ const NoteContent = ({ Note }) => {
           </p>
         </div>
       </header>
-      <article className="border rounded p-3">{Note.content}</article>
+      <article className="border rounded p-3">
+        <ReactMarkdown source={Note.content} />
+      </article>
       <Link to="/" className="btn btn-sm btn-info mt-3">
         Back to Home
       </Link>
