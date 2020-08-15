@@ -1,6 +1,19 @@
 import React, { Component } from "react";
+import { GetAllNotes } from "../../services/NotesService";
 
 class Notes extends Component {
+  state = {
+    Notes: []
+  };
+  componentDidMount() {
+    GetAllNotes().then(res => {
+      if (res.status === 200) {
+        this.setState({
+          Notes: res.data
+        });
+      }
+    });
+  }
   render() {
     const { LoggedIn, Logout } = this.props;
     return (
