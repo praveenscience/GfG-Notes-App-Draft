@@ -31,7 +31,10 @@ class Notes extends Component {
                   <Router>
                     <Switch>
                       <Route path={["/:NoteID", "/"]}>
-                        <NotesSidebar Notes={this.state.Notes} />
+                        <NotesSidebar
+                          Notes={this.state.Notes}
+                          LoggedIn={LoggedIn}
+                        />
                         <NotesContainer />
                       </Route>
                     </Switch>
