@@ -5,6 +5,11 @@ import NotesContainer from "./_NotesContainer";
 const NotesList = ({ Notes, LoggedIn }) => {
   const [Mine, setMine] = useState(false);
   const urm = useRouteMatch();
+  Notes =
+    Notes.map &&
+    Notes.map((note, NoteID) => ({ ...note, NoteID })).filter(note =>
+      Mine ? note.username === LoggedIn.username : true
+    );
   return (
     <>
       <div className="btn-group mb-3">
@@ -28,18 +33,21 @@ const NotesList = ({ Notes, LoggedIn }) => {
         </button>
       </div>
       <div className="list-group">
-        {Notes.map &&
-          Notes.map((note, NoteID) => ({ ...note, NoteID }))
-            .filter(note => (Mine ? note.username === LoggedIn.username : true))
-            .map((note, key) => (
-              <Link
-                to={"/note-" + note.NoteID}
-                className="list-group-item list-group-item-action"
-                key={key}
-              >
-                {note.title}
-              </Link>
-            ))}
+        {Notes.length > 0 ? (
+          Notes.map((note, key) => (
+            <Link
+              to={"/note-" + note.NoteID}
+              className="list-group-item list-group-item-action"
+              key={key}
+            >
+              {note.title}
+            </Link>
+          ))
+        ) : (
+          <div className="alert alert-info">
+            You haven't created any notes yet. Please create one.
+          </div>
+        )}
       </div>
     </>
   );
