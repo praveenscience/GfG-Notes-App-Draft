@@ -1,9 +1,15 @@
 import React from "react";
+import { Link, useRouteMatch } from "react-router-dom";
 
 const NotesContainer = () => {
+  const urm = useRouteMatch();
   return (
     <div className="col-10">
-      <p>This is notes container.</p>
+      <p>
+        {urm.path === "/"
+          ? "You're in the home page."
+          : "You're in " + urm.params.NoteID}
+      </p>
     </div>
   );
 };
