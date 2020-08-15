@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 /*
 {
@@ -25,6 +26,9 @@ const NoteContent = ({ Note }) => {
         </div>
       </header>
       <article className="border rounded p-3 bg-light">{Note.content}</article>
+      <Link to="/" className="btn btn-sm btn-info mt-3">
+        Back to Home
+      </Link>
     </section>
   );
 };
