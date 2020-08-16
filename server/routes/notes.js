@@ -65,7 +65,8 @@ app.post("/", (req, res) => {
         private,
         editCount,
         createdAt,
-        updatedAt
+        updatedAt,
+        noteid: notes.length
       }) - 1
     );
   } else {
