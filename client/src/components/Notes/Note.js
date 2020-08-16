@@ -6,7 +6,8 @@ import ReactMarkdown from "react-markdown";
 const NoteContent = ({ Note, DelNote, LoggedIn }) => {
   const handleDelete = e => {
     e.preventDefault();
-    DelNote(Note.noteid);
+    if (window.confirm("Are you sure you want to delete this note?"))
+      DelNote(Note.noteid);
   };
   return (
     <section
