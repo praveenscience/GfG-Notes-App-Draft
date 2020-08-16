@@ -15,8 +15,10 @@ const NotesContainer = ({ Notes, DelNote, LoggedIn }) => {
     <div className="NotesContainer col-10">
       {!isHome && Note ? (
         <NoteContent DelNote={DelNote} Note={Note} LoggedIn={LoggedIn} />
-      ) : (
+      ) : isHome ? (
         <NotesHome />
+      ) : (
+        <NotesHome is404={true} />
       )}
     </div>
   );
