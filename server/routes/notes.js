@@ -14,6 +14,8 @@ const notes = require("../storage/notes.json").map((note, NoteID) => ({
   NoteID
 }));
 
+const GetNoteById = NoteID => notes.find(note => note.NoteID === +NoteID);
+
 // Work with notes only if user is logged in.
 app.use((req, res, next) => {
   if (!req.session.User) {
