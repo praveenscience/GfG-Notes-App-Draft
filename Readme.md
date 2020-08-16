@@ -2,7 +2,7 @@
 
 - Allows users to login and logout. (API ✅ / FE ✅)
 - Allows users to register. (API ✅ / FE ✅)
-- Allows users to create notes. (API ✅ / FE ❎)
+- Allows users to create notes. (API ✅ / FE ✅)
 - Allows users to browse notes. (API ✅ / FE ✅)
 - Allows users to view particular note. (API ✅ / FE ✅)
 - Allows users to view their own notes. (API ✅ / FE ✅)
