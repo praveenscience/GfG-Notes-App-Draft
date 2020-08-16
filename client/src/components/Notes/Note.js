@@ -3,7 +3,7 @@ import Moment from "moment";
 import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 
-const NoteContent = ({ Note, DelNote }) => {
+const NoteContent = ({ Note, DelNote, LoggedIn }) => {
   const handleDelete = e => {
     e.preventDefault();
     DelNote(Note.noteid);
@@ -14,12 +14,14 @@ const NoteContent = ({ Note, DelNote }) => {
     >
       <header>
         <h3>
-          <button
-            className="btn btn-sm btn-danger float-right"
-            onClick={handleDelete}
-          >
-            Delete
-          </button>
+          {Note.username === LoggedIn.username && (
+            <button
+              className="btn btn-sm btn-danger float-right"
+              onClick={handleDelete}
+            >
+              Delete
+            </button>
+          )}
           {Note.title}
         </h3>
         <div className="Author">

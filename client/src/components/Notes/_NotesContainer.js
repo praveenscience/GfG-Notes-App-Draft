@@ -3,7 +3,7 @@ import { useRouteMatch } from "react-router-dom";
 import NotesHome from "./_NotesHome";
 import NoteContent from "./Note";
 
-const NotesContainer = ({ Notes, DelNote }) => {
+const NotesContainer = ({ Notes, DelNote, LoggedIn }) => {
   const urm = useRouteMatch();
   const isHome = urm.path === "/";
   const Note = !isHome
@@ -14,7 +14,7 @@ const NotesContainer = ({ Notes, DelNote }) => {
   return (
     <div className="NotesContainer col-10">
       {!isHome && Note ? (
-        <NoteContent DelNote={DelNote} Note={Note} />
+        <NoteContent DelNote={DelNote} Note={Note} LoggedIn={LoggedIn} />
       ) : (
         <NotesHome />
       )}

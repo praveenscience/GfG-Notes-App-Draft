@@ -51,6 +51,7 @@ class Notes extends Component {
                         <NotesContainer
                           Notes={this.state.Notes}
                           DelNote={this.DeleteNote}
+                          LoggedIn={LoggedIn}
                         />
                       </Route>
                     </Switch>
