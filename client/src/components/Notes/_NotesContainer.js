@@ -6,7 +6,11 @@ import NoteContent from "./Note";
 const NotesContainer = ({ Notes }) => {
   const urm = useRouteMatch();
   const isHome = urm.path === "/";
-  const Note = !isHome ? Notes[+urm.params.NoteID.replace("note-", "")] : null;
+  const Note = !isHome
+    ? Notes.find(
+        note => note.noteid === +urm.params.NoteID.replace("note-", "")
+      )
+    : null;
   return (
     <div className="NotesContainer col-10">
       {!isHome && Note ? <NoteContent Note={Note} /> : <NotesHome />}

@@ -5,10 +5,8 @@ const NotesList = ({ Notes, LoggedIn }) => {
   const [Mine, setMine] = useState(false);
   const urm = useRouteMatch();
   Notes =
-    Notes.map &&
-    Notes.map((note, NoteID) => ({ ...note, NoteID })).filter(note =>
-      Mine ? note.username === LoggedIn.username : true
-    );
+    Notes.filter &&
+    Notes.filter(note => (Mine ? note.username === LoggedIn.username : true));
   return (
     <>
       <div className="btn-group mb-3">
@@ -35,10 +33,10 @@ const NotesList = ({ Notes, LoggedIn }) => {
         {Notes.length > 0 ? (
           Notes.map((note, key) => (
             <Link
-              to={"/note-" + note.NoteID}
+              to={"/note-" + note.noteid}
               className={
                 "list-group-item list-group-item-action" +
-                ("/note-" + note.NoteID === urm.url ? " active" : "") +
+                ("/note-" + note.noteid === urm.url ? " active" : "") +
                 (note.private ? " list-group-item-info" : "")
               }
               key={key}
