@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { GetAllNotes } from "../../services/NotesService";
+import { GetAllNotes, DeleteNote } from "../../services/NotesService";
 import WelcomeHeader from "./_WelcomeHeader";
 import NotesSidebar from "./_NotesSidebar";
 import NotesContainer from "./_NotesContainer";
@@ -18,6 +18,19 @@ class Notes extends Component {
       }
     });
   }
+  DeleteNote = NoteID => {
+    DeleteNote(NoteID).then(res => {
+      if (res.status === 200) {
+        GetAllNotes().then(res => {
+          if (res.status === 200) {
+            this.setState({
+              Notes: res.data
+            });
+          }
+        });
+      }
+    });
+  };
   render() {
     const { LoggedIn, Logout } = this.props;
     return (
@@ -35,7 +48,10 @@ class Notes extends Component {
                           Notes={this.state.Notes}
                           LoggedIn={LoggedIn}
                         />
-                        <NotesContainer Notes={this.state.Notes} />
+                        <NotesContainer
+                          Notes={this.state.Notes}
+                          DelNote={this.DeleteNote}
+                        />
                       </Route>
                     </Switch>
                   </Router>
