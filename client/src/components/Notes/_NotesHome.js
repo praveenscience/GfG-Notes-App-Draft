@@ -1,20 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const NotesHome = ({ is404 }) => {
+const NotesHome = ({ is404, Deleted }) => {
   return (
-    <div>
+    <section className="NotesContainer-Content">
       {is404 ? (
-        <div className="text-center">
-          <div className="alert alert-danger">Error! Note not found.</div>
+        <header className="text-center">
+          <h3 className="text-left mb-3">
+            {Deleted ? "Deleted!" : "Not Found!"}
+          </h3>
+          <div className={"alert alert-" + (Deleted ? "success" : "danger")}>
+            {Deleted
+              ? "The note has been successfully deleted."
+              : "Error! Note not found."}
+          </div>
           <Link to="/" className="btn btn-sm btn-info">
             Back to Home
           </Link>
-        </div>
+        </header>
       ) : (
         <p>Welcome to Notes! Click on any of the notes on the left to see!</p>
       )}
-    </div>
+    </section>
   );
 };
 

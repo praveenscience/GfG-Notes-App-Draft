@@ -3,7 +3,7 @@ import { useRouteMatch } from "react-router-dom";
 import NotesHome from "./_NotesHome";
 import NoteContent from "./Note";
 
-const NotesContainer = ({ Notes, DelNote, LoggedIn }) => {
+const NotesContainer = ({ Notes, DelNote, LoggedIn, Deleted }) => {
   const urm = useRouteMatch();
   const isHome = urm.path === "/";
   const Note = !isHome
@@ -18,7 +18,7 @@ const NotesContainer = ({ Notes, DelNote, LoggedIn }) => {
       ) : isHome ? (
         <NotesHome />
       ) : (
-        <NotesHome is404={true} />
+        <NotesHome is404={true} Deleted={Deleted} />
       )}
     </div>
   );
