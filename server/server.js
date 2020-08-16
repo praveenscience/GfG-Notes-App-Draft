@@ -27,9 +27,12 @@ app.use(
 );
 
 // Use the routes.
-app.use("/", root);
 app.use("/api/users", users);
 app.use("/api/notes", notes);
+app.use("/", express.static("./static"));
+app.get("*", (req, res) => {
+  res.sendFile(__dirname + "/static/index.html");
+});
 
 // Listen to 3100 port.
 app.listen(port, () => {
