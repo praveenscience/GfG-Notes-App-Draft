@@ -80,28 +80,28 @@ app.get("/me", (req, res) => {
 // View a particular note.
 app.get("/:noteId", (req, res) => {
   const noteId = +req.params.noteId;
-  if (!notes[noteId] || !notes[noteId].username) {
+  if (!GetNoteById(noteId) || !GetNoteById(noteId).username) {
     res.status(404).json("Note doesn't exist.");
   } else if (
-    notes[noteId].private &&
-    notes[noteId].username !== req.session.User.username
+    GetNoteById(noteId).private &&
+    GetNoteById(noteId).username !== req.session.User.username
   ) {
     // Don't show others private notes!
     res.status(403).json("You don't have access to this note.");
   } else {
-    res.json(notes[noteId]);
+    res.json(GetNoteById(noteId));
   }
 });
 // Update particular note.
 app.post("/:noteId", (req, res) => {
   const noteId = +req.params.noteId;
-  if (!notes[noteId] || !notes[noteId].username) {
+  if (!GetNoteById(noteId) || !GetNoteById(noteId).username) {
     res.status(404).json("Note doesn't exist.");
-  } else if (notes[noteId].username !== req.session.User.username) {
+  } else if (GetNoteById(noteId).username !== req.session.User.username) {
     // Don't give access to others' notes!
     res.status(403).json("You don't have access to edit or delete this note.");
   } else {
-    const note = notes[noteId];
+    const note = GetNoteById(noteId);
     if (
       req.body.title &&
       req.body.title.trim().length > 3 &&
@@ -113,7 +113,7 @@ app.post("/:noteId", (req, res) => {
       const editCount = note.editCount + 1,
         updatedAt = new Date();
       // Update the particular note.
-      notes[noteId] = {
+      GetNoteById(noteId) = {
         ...note,
         title,
         content,
@@ -130,9 +130,9 @@ app.post("/:noteId", (req, res) => {
 // Delete particular note.
 app.delete("/:noteId", (req, res) => {
   const noteId = +req.params.noteId;
-  if (!notes[noteId] || !notes[noteId].username) {
+  if (!GetNoteById(noteId) || !GetNoteById(noteId).username) {
     res.status(404).json("Note doesn't exist.");
-  } else if (notes[noteId].username !== req.session.User.username) {
+  } else if (GetNoteById(noteId).username !== req.session.User.username) {
     // Don't give access to others' notes!
     res.status(403).json("You don't have access to edit or delete this note.");
   } else {
