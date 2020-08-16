@@ -1,7 +1,9 @@
 import Axios from "axios";
+import APIHost from "./APIHost";
 
-export const GetAllNotes = () => Axios.get("/api/notes");
+export const GetAllNotes = () => Axios.get(APIHost + "/api/notes");
 
-export const CreateNote = Note => Axios.post("/api/notes", Note);
+export const CreateNote = Note => Axios.post(APIHost + "/api/notes", Note);
 
-export const DeleteNote = NoteID => Axios.delete("/api/notes/" + NoteID);
+export const DeleteNote = NoteID =>
+  Axios.delete(APIHost + "/api/notes/" + NoteID);
