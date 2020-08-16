@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { GetAllNotes, DeleteNote } from "../../services/NotesService";
+import {
+  GetAllNotes,
+  DeleteNote,
+  CreateNote
+} from "../../services/NotesService";
 import WelcomeHeader from "./_WelcomeHeader";
 import NotesSidebar from "./_NotesSidebar";
 import NotesContainer from "./_NotesContainer";
@@ -33,6 +37,19 @@ class Notes extends Component {
       }
     });
   };
+  CreateNote = Note => {
+    CreateNote(Note).then(res => {
+      if (res.status === 200) {
+        GetAllNotes().then(res => {
+          if (res.status === 200) {
+            this.setState({
+              Notes: res.data
+            });
+          }
+        });
+      }
+    });
+  };
   render() {
     const { LoggedIn, Logout } = this.props;
     return (
@@ -45,7 +62,7 @@ class Notes extends Component {
                 <div className="row">
                   <Router>
                     <Switch>
-                      <Route path={["/:NoteID", "/"]}>
+                      <Route path={["/new", "/:NoteID", "/"]}>
                         <NotesSidebar
                           Notes={this.state.Notes}
                           LoggedIn={LoggedIn}
@@ -55,6 +72,7 @@ class Notes extends Component {
                           DelNote={this.DeleteNote}
                           LoggedIn={LoggedIn}
                           Deleted={this.state.Deleted}
+                          CreateNote={this.CreateNote}
                         />
                       </Route>
                     </Switch>

@@ -9,7 +9,7 @@ const NotesList = ({ Notes, LoggedIn }) => {
     Notes.filter(note => (Mine ? note.username === LoggedIn.username : true));
   return (
     <>
-      <div className="btn-group mb-3">
+      <div className="btn-group mb-3 mr-2">
         <button
           className={"btn btn-sm btn-primary" + (Mine ? "" : " active")}
           onClick={e => {
@@ -29,6 +29,9 @@ const NotesList = ({ Notes, LoggedIn }) => {
           My Notes
         </button>
       </div>
+      <Link to="/new" className="btn btn-sm btn-primary mb-3">
+        New
+      </Link>
       <div className="list-group">
         {Notes.length > 0 ? (
           Notes.map((note, key) => (
