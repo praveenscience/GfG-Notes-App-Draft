@@ -1,5 +1,15 @@
 # GfG Notes App
 
+This is full stack application to demonstrate how we can use JavaScript for both front and backend.
+
+## Screenshot
+
+**Login Screen**
+
+![](https://i.imgur.com/aYcOJuh.png)
+
+## Tasks
+
 - Allows users to login and logout. (API ✅ / FE ✅)
 - Allows users to register. (API ✅ / FE ✅)
 - Allows users to create notes. (API ✅ / FE ✅)
