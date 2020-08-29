@@ -39,6 +39,11 @@ const Login = ({ handleAuthentication, Error, Success }) => {
         if (res.status === 201) {
           setRegSuccess(res.data);
           setRegError(false);
+          setRegisterData({
+            username: "",
+            password: "",
+            fullname: ""
+          });
         }
       })
       .catch(err => {
