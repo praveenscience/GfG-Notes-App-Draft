@@ -8,6 +8,8 @@ const NotesContainer = ({ Notes, DelNote, LoggedIn, Deleted, CreateNote }) => {
   const urm = useRouteMatch();
   const isNew = urm.path === "/new";
   const isHome = urm.path === "/";
+  const isEdit = urm.path.indexOf("/edit") > 0;
+
   const Note =
     !isHome && !isNew
       ? Notes.find(
@@ -16,10 +18,12 @@ const NotesContainer = ({ Notes, DelNote, LoggedIn, Deleted, CreateNote }) => {
       : null;
   const content = () => {
     switch (true) {
-      case !isHome && !isNew && !!Note:
+      case !isHome && !isNew && !!Note && !isEdit:
         return (
           <NoteContent DelNote={DelNote} Note={Note} LoggedIn={LoggedIn} />
         );
+      case isEdit:
+        return <p>Edit Mode</p>;
       case isHome:
         return <NotesHome />;
       case isNew:

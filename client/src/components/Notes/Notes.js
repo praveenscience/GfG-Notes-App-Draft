@@ -62,7 +62,7 @@ class Notes extends Component {
                 <div className="row">
                   <Router>
                     <Switch>
-                      <Route path={["/new", "/:NoteID", "/"]}>
+                      <Route path={["/new", "/:NoteID/edit", "/:NoteID", "/"]}>
                         <NotesSidebar
                           Notes={this.state.Notes}
                           LoggedIn={LoggedIn}

@@ -16,12 +16,17 @@ const NoteContent = ({ Note, DelNote, LoggedIn }) => {
       <header>
         <h3>
           {Note.username === LoggedIn.username && (
-            <button
-              className="btn btn-sm btn-danger float-right"
-              onClick={handleDelete}
-            >
-              Delete
-            </button>
+            <div className="btn-group float-right">
+              <Link
+                className="btn btn-sm btn-info"
+                to={`/note-${Note.noteid}/edit`}
+              >
+                Edit
+              </Link>
+              <button className="btn btn-sm btn-danger" onClick={handleDelete}>
+                Delete
+              </button>
+            </div>
           )}
           {Note.title}
         </h3>
