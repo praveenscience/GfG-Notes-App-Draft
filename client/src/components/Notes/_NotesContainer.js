@@ -3,8 +3,16 @@ import { useRouteMatch } from "react-router-dom";
 import NotesHome from "./_NotesHome";
 import NoteContent from "./Note";
 import NewNote from "./NewNote";
+import EditNote from "./EditNote";
 
-const NotesContainer = ({ Notes, DelNote, LoggedIn, Deleted, CreateNote }) => {
+const NotesContainer = ({
+  Notes,
+  DelNote,
+  LoggedIn,
+  Deleted,
+  CreateNote,
+  UpdateNote
+}) => {
   const urm = useRouteMatch();
   const isNew = urm.path === "/new";
   const isHome = urm.path === "/";
@@ -23,7 +31,9 @@ const NotesContainer = ({ Notes, DelNote, LoggedIn, Deleted, CreateNote }) => {
           <NoteContent DelNote={DelNote} Note={Note} LoggedIn={LoggedIn} />
         );
       case isEdit:
-        return <p>Edit Mode</p>;
+        return Note ? (
+          <EditNote LoggedIn={LoggedIn} Note={Note} UpdateNote={UpdateNote} />
+        ) : null;
       case isHome:
         return <NotesHome />;
       case isNew:

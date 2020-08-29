@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import {
   GetAllNotes,
   DeleteNote,
-  CreateNote
+  CreateNote,
+  UpdateNote
 } from "../../services/NotesService";
 import WelcomeHeader from "./_WelcomeHeader";
 import NotesSidebar from "./_NotesSidebar";
@@ -50,6 +51,19 @@ class Notes extends Component {
       }
     });
   };
+  UpdateNote = (NoteID, Note) => {
+    UpdateNote(NoteID, Note).then(res => {
+      if (res.status === 200) {
+        GetAllNotes().then(res => {
+          if (res.status === 200) {
+            this.setState({
+              Notes: res.data
+            });
+          }
+        });
+      }
+    });
+  };
   render() {
     const { LoggedIn, Logout } = this.props;
     return (
@@ -73,6 +87,7 @@ class Notes extends Component {
                           LoggedIn={LoggedIn}
                           Deleted={this.state.Deleted}
                           CreateNote={this.CreateNote}
+                          UpdateNote={this.UpdateNote}
                         />
                       </Route>
                     </Switch>
