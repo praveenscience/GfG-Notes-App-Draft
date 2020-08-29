@@ -114,7 +114,7 @@ app.post("/:noteId", (req, res) => {
       const editCount = note.editCount + 1,
         updatedAt = new Date();
       // Update the particular note.
-      GetNoteById(noteId) = {
+      notes[noteId] = {
         ...note,
         title,
         content,
